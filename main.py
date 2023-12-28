@@ -16,6 +16,10 @@ while True:
         state = "profit"
         os_notify(f"{stock.upper()} increased to {curr_price}, sell the stock to get a profit")
     elif state != "loss" and curr_price <= (purchased_price * (100-loss_perc) /100):
-        state == "loss"
+        state = "loss"
         os_notify(f"{stock.upper()} decreased to {curr_price}, sell the stock to prevent loss")
+    if (state == "profit" and curr_price < (purchased_price * (profit_perc + 100) / 100))\
+            or (state == "loss" and (purchased_price * (100-loss_perc) /100) < curr_price):
+        state = "neutral"
+        os_notify(f"{stock.upper()} price fell back to neutral at {curr_price}")
     time.sleep(30)
