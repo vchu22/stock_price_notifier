@@ -1,8 +1,7 @@
 import platform
-from pync import Notifier
-os_type = platform.system()
+from notifypy import Notify
+notification = Notify(default_notification_title="Stock Notifier")
 
 def os_notify(message):
-    if os_type == 'Darwin':
-        print(message)
-        Notifier.notify(message, sound=True)
+    notification.message = message
+    notification.send(block=False)
